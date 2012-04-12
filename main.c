@@ -10,7 +10,7 @@
 
 //global variables
 volatile uint16_t time;
-volatile uint8_t last;
+volatile uint16_t last;
 volatile uint16_t up_time;
 
 ISR(INT0_vect)
@@ -21,7 +21,7 @@ ISR(INT0_vect)
 		}else
 		{
 			if(time > up_time) {
-				last=time - up_time-220;
+				last=time - up_time-200;
 			}else{
 				last = up_time - time-220;
 			}
@@ -34,16 +34,6 @@ ISR(TIM0_COMPA_vect)
 {
 	//Timer interrupt will be generated every 5us
 	time++;
-	if(last!=0)
-	{
-		if( time%(~(last)) == 0) {
-			PIN_UP;
-		}else{
-			PIN_DOWN;
-		}
-	}else {
-		PIN_DOWN;
-	}
 	
 }
 
@@ -71,6 +61,20 @@ int main()
 	PORTB=(1<<3);
 	time=last=up_time=0;
 	sei();
-	while(1);
+	while(1) { 
+		if(last>=36) {
+			if(last<=(36+128)) {
+				PIN_UP;
+			} else { 
+				if( time%(~((last-36)<<2)) == 0) { 
+					PIN_UP; 
+				}else{ 
+					PIN_DOWN; 
+				}
+			} 
+		}else { 
+				PIN_DOWN; 
+		}
+	} 
 	
 }

@@ -1,0 +1,28 @@
+
+[indentation]
+indent_width=4
+indent_type=1
+indent_hard_tab_width=8
+detect_indent=false
+indent_mode=2
+
+[project]
+name=hk-beeper
+base_path=/home/paze/Projects/hk-beeper/
+description=
+
+[long line marker]
+long_line_behaviour=1
+long_line_column=72
+
+[files]
+current_page=0
+FILE_NAME_0=2577;C;0;16;1;1;0;/home/paze/Projects/hk-beeper/main.c;0;4
+
+[build-menu]
+NF_03_LB=Make program
+NF_03_CM=make program
+NF_03_WD=
+NF_02_LB=Make clean
+NF_02_CM=make clean
+NF_02_WD=

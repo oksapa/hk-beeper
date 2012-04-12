@@ -1,3 +1,23 @@
+/*
+ * This file is part of the hk-beeper project.
+ *
+ * Copyright (C) 2011 Pasi Oksa <pasi.oksa@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+ */
+ 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <inttypes.h>
@@ -16,6 +36,14 @@ volatile uint16_t time;
 volatile uint16_t last;
 volatile uint16_t up_time;
 volatile uint8_t state;
+
+//private functions
+void init_timer(void);
+void init_ext_int(void);
+void delay(uint8_t t);
+
+//ISR routines
+
 ISR(INT0_vect)
 {
 		if(state) {
@@ -35,6 +63,7 @@ ISR(INT0_vect)
 		}
 				
 }
+//---------------------------------------
 
 ISR(TIM0_COMPA_vect)
 {
@@ -43,7 +72,8 @@ ISR(TIM0_COMPA_vect)
 	time++;
 }
 
-void init_timer()
+//---------------------------------------
+void init_timer(void)
 {
 	TCCR0A = (1<<WGM01);
 	TCCR0B = (1<<CS00);
@@ -53,13 +83,15 @@ void init_timer()
 	
 	
 }
+//---------------------------------------
 
-void init_ext_int()
+void init_ext_int(void)
 {
 		RISING_EDGE_INTERRUPT;
 		state=1;
 		GIMSK = (1<<6);
 }
+//---------------------------------------
 
 void delay(uint8_t t)
 {
@@ -68,8 +100,9 @@ void delay(uint8_t t)
 		_delay_us(1);
 	}
 }
+//---------------------------------------
 
-int main()
+int main(void)
 {
 	init_timer();
 	init_ext_int();
@@ -95,3 +128,4 @@ int main()
 	} 
 	
 }
+//---------------------------------------

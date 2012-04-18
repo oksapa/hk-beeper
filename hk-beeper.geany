@@ -16,8 +16,9 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
-FILE_NAME_0=2249;C;0;16;1;1;0;/home/paze/Projects/hk-beeper/main.c;0;4
+current_page=1
+FILE_NAME_0=2249;C;0;16;0;1;0;/home/paze/Projects/hk-beeper/main.c;0;4
+FILE_NAME_1=40;Make;0;16;1;1;0;/home/paze/Projects/hk-beeper/makefile;0;4
 
 [build-menu]
 NF_03_LB=Make program

@@ -33,7 +33,7 @@
 
 //global variables
 volatile uint16_t time;
-volatile uint16_t last;
+volatile int16_t last;
 volatile uint16_t up_time;
 volatile uint8_t state;
 
@@ -113,9 +113,7 @@ int main(void)
 	while(1) { 
 		if(last > 0) {
 			if(last > 128 ) {
-				if (last < 300) {
 					PIN_UP;
-				}
 			} else { 
 				PIN_UP;
 				delay(last);
